@@ -36,7 +36,7 @@ const Login = () => {
       setFormData({ ...formData, error: 'Email Tidak Valid!' });
       return;
     }
-    const url = 'http://smrapi.my.id/login';
+    const url = process.env.REACT_APP_API_URL + '/login';
     try {
       const response = await axios.post(url, { email, password });
       if (response.data.status) {

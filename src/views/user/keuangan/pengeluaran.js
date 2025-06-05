@@ -24,7 +24,7 @@ const Pengeluaran = () => {
 
   const fetchData = async () => {
       try {
-        const url = localStorage.getItem('role') === 'koordinator' ? 'http://smrapi.my.id/koordinatorKecakapan/' : 'http://smrapi.my.id/user/';
+        const url = localStorage.getItem('role') === 'koordinator' ? process.env.REACT_APP_API_URL + '/koordinatorKecakapan/' : process.env.REACT_APP_API_URL + '/user/';
         const response = await axios.get(url+localStorage.getItem('UID'), {
           headers: {
             'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ const Pengeluaran = () => {
           },
         });
         setKegiatan(response.data.kegiatan_id);
-        const pengeluaran = await axios.get('http://smrapi.my.id/pengeluaran/'+response.data.kegiatan_id, {
+        const pengeluaran = await axios.get(process.env.REACT_APP_API_URL + '/pengeluaran/'+response.data.kegiatan_id, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -148,7 +148,7 @@ const Pengeluaran = () => {
       formData.delete('nota_pengeluaran');
     }
     try {
-      const response = await axios.post('http://smrapi.my.id/pengeluaran', formData, {
+      const response = await axios.post(process.env.REACT_APP_API_URL + '/pengeluaran', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -189,7 +189,7 @@ const Pengeluaran = () => {
       qty_pengeluaran: parseInt(event.target.banyakbarang.value),
       total_pengeluaran: parseInt(event.target.harga.value) * parseInt(event.target.banyakbarang.value),
     };
-    axios.post(`http://smrapi.my.id/updatePengeluaran/${editItem.id}`, updatedPengeluaran, {
+    axios.post(`${process.env.REACT_APP_API_URL}/updatePengeluaran/${editItem.id}`, updatedPengeluaran, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -206,7 +206,7 @@ const Pengeluaran = () => {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://smrapi.my.id/pengeluaran/${id}`, {
+    axios.delete(`${process.env.REACT_APP_API_URL}/pengeluaran/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -339,7 +339,7 @@ const Pengeluaran = () => {
       <CModal visible={modalNotaVisible} onClose={() => setModalNotaVisible(false)}>
         <CModalHeader closeButton>Lihat Nota</CModalHeader>
         <CModalBody>
-          {selectedNota ? <img src={`http://smrapi.my.id/nota/${selectedNota}`} alt="Nota" style={{ width: '100%' }} /> : <p>Nota tidak tersedia.</p>}
+          {selectedNota ? <img src={`${process.env.REACT_APP_API_URL}/nota/${selectedNota}`} alt="Nota" style={{ width: '100%' }} /> : <p>Nota tidak tersedia.</p>}
         </CModalBody>
       </CModal>
     </CCard>

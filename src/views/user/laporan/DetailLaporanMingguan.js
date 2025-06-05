@@ -11,7 +11,7 @@ const DetailLaporanMingguan = ({props, setShowModal, setShowLaporan, setLaporan}
   useEffect(() => {
     const fetchLaporanHarian = async () => {
       try {
-        const response = await axios.get('http://smrapi.my.id/laporan_harian/'+kegiatan.no, {
+        const response = await axios.get(process.env.REACT_APP_API_URL + '/laporan_harian/'+kegiatan.no, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }

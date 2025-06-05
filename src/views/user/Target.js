@@ -18,7 +18,7 @@ const Target = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://smrapi.my.id/target/' + localStorage.getItem('kegiatan_id'), {
+        const response = await axios.get(process.env.REACT_APP_API_URL + '/target/' + localStorage.getItem('kegiatan_id'), {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('token')}`,

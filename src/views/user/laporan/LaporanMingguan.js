@@ -35,7 +35,7 @@ const LaporanMingguan = () => {
     const fetchKegiatan = async () => {
       const kegiatan_id = localStorage.getItem('kegiatan_id');
       try {
-        const response = await axios.get(`http://smrapi.my.id/daftar_kegiatan/`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/daftar_kegiatan/`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
@@ -51,7 +51,7 @@ const LaporanMingguan = () => {
 
   const handleValidasi = async (id) => {
     try {
-        const response = await axios.post(`http://smrapi.my.id/validasiLaporan/${id}`, {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/validasiLaporan/${id}`, {
           status: 'valid'
         }, {
           headers: {

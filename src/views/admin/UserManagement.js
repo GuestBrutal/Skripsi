@@ -15,7 +15,7 @@ const UserManagement = () => {
   }, []);
 
   const fetchUsers = async () => {
-    const url = 'http://smrapi.my.id/user';
+    const url = process.env.REACT_APP_API_URL + '/user';
     try {
       const response = await axios.get(url, {
         headers: {
@@ -34,7 +34,7 @@ const UserManagement = () => {
   };
 
   const fetchKoordinator = async () => {
-    const url = 'http://smrapi.my.id/koordinatorKecakapan';
+    const url = process.env.REACT_APP_API_URL + '/koordinatorKecakapan';
     try {
       const response = await axios.get(url, {
         headers: {
@@ -53,7 +53,7 @@ const UserManagement = () => {
   };
 
   const handleDelete = async (data) => {
-    const url = data.role ? `http://smrapi.my.id/user/${data.id}` : `http://smrapi.my.id/koordinatorKecakapan/${data.id}`;
+    const url = data.role ? `${process.env.REACT_APP_API_URL}/user/${data.id}` : `${process.env.REACT_APP_API_URL}/koordinatorKecakapan/${data.id}`;
     try {
       const response = await axios.delete(url, {
         headers: {
